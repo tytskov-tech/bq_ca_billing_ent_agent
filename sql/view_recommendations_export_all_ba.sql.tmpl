@@ -1,0 +1,15 @@
+-- =============================================================================
+-- Template: Per-Source SELECT block for `recommendations_export_all_ba`
+-- Target:   `${PROJECT_ID}.${ENT_DATASET}.recommendations_export_all_ba`
+-- Note:     Rendered per entry in RECOMMENDATIONS_SOURCES and combined via
+--           UNION ALL inside `SELECT * FROM ( ... )` by 03_create_ent_views.sh.
+-- =============================================================================
+      SELECT
+        _PARTITIONTIME AS time_stamp,
+        *
+      FROM
+        `${REC_PROJECT_ID}.${REC_DATASET}.${REC_TABLE}`
+      WHERE
+        cloud_entity_id IN (
+          SELECT project_number FROM `${PROJECT_ID}.${ENT_DATASET}.billing_projects`
+        )

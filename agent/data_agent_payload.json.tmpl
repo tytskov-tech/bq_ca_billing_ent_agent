@@ -1,0 +1,36 @@
+{
+  "displayName": "${CA_AGENT_DISPLAY_NAME}",
+  "description": "${CA_AGENT_DESCRIPTION}",
+  "dataAnalyticsAgent": {
+    "publishedContext": {
+      "systemInstruction": ${SYSTEM_INSTRUCTION_JSON},
+      "exampleQueries": ${EXAMPLE_QUERIES_JSON},
+      "datasourceReferences": {
+        "bq": {
+          "tableReferences": [
+            {
+              "projectId": "${PROJECT_ID}",
+              "datasetId": "${ENT_DATASET}",
+              "tableId": "gcp_billing_export_v1_all_ba"
+            },
+            {
+              "projectId": "${PROJECT_ID}",
+              "datasetId": "${ENT_DATASET}",
+              "tableId": "gcp_billing_export_resource_v1_all_ba"
+            },
+            {
+              "projectId": "${PROJECT_ID}",
+              "datasetId": "${ENT_DATASET}",
+              "tableId": "cloud_pricing_export_all_ba"
+            },
+            {
+              "projectId": "${PROJECT_ID}",
+              "datasetId": "${ENT_DATASET}",
+              "tableId": "recommendations_export_all_ba"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

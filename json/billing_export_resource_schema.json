@@ -1,0 +1,524 @@
+[
+  {
+    "mode": "NULLABLE",
+    "name": "time_stamp",
+    "type": "TIMESTAMP",
+    "description": "The partition column, which represents the timestamp when data is recorded in the table, should be included in every query."
+  },
+  {
+    "description": "Unique identifier for the billing account.",
+    "mode": "NULLABLE",
+    "name": "billing_account_id",
+    "type": "STRING"
+  },
+  {
+    "description": "Information about the GCP service being billed.",
+    "fields": [
+      {
+        "description": "Unique identifier for the GCP service.",
+        "mode": "NULLABLE",
+        "name": "id",
+        "type": "STRING"
+      },
+      {
+        "description": "Description of the GCP service.",
+        "mode": "NULLABLE",
+        "name": "description",
+        "type": "STRING"
+      }
+    ],
+    "mode": "NULLABLE",
+    "name": "service",
+    "type": "RECORD"
+  },
+  {
+    "description": "Information about the specific service or resource being billed.",
+    "fields": [
+      {
+        "description": "Unique identifier for the service or resource.",
+        "mode": "NULLABLE",
+        "name": "id",
+        "type": "STRING"
+      },
+      {
+        "description": "Description of the service or resource.",
+        "mode": "NULLABLE",
+        "name": "description",
+        "type": "STRING"
+      }
+    ],
+    "mode": "NULLABLE",
+    "name": "sku",
+    "type": "RECORD"
+  },
+  {
+    "description": "Timestamp indicating the start of the usage period.",
+    "mode": "NULLABLE",
+    "name": "usage_start_time",
+    "type": "TIMESTAMP"
+  },
+  {
+    "description": "Timestamp indicating the end of the usage period.",
+    "mode": "NULLABLE",
+    "name": "usage_end_time",
+    "type": "TIMESTAMP"
+  },
+  {
+    "description": "Information about the GCP project associated with the billing record.",
+    "fields": [
+      {
+        "description": "Unique identifier for the GCP project.",
+        "mode": "NULLABLE",
+        "name": "id",
+        "type": "STRING"
+      },
+      {
+        "description": "Project number assigned by GCP.",
+        "mode": "NULLABLE",
+        "name": "number",
+        "type": "STRING"
+      },
+      {
+        "description": "Name of the GCP project.",
+        "mode": "NULLABLE",
+        "name": "name",
+        "type": "STRING"
+      },
+      {
+        "description": "User-defined labels associated with the GCP project.",
+        "fields": [
+          {
+            "description": "Key of the project label.",
+            "mode": "NULLABLE",
+            "name": "key",
+            "type": "STRING"
+          },
+          {
+            "description": "Value of the project label.",
+            "mode": "NULLABLE",
+            "name": "value",
+            "type": "STRING"
+          }
+        ],
+        "mode": "REPEATED",
+        "name": "labels",
+        "type": "RECORD"
+      },
+      {
+        "description": "Ancestry numbers of the GCP project.",
+        "mode": "NULLABLE",
+        "name": "ancestry_numbers",
+        "type": "STRING"
+      },
+      {
+        "description": "Information about the ancestors of the GCP project.",
+        "fields": [
+          {
+            "description": "Resource name of the ancestor.",
+            "mode": "NULLABLE",
+            "name": "resource_name",
+            "type": "STRING"
+          },
+          {
+            "description": "Display name of the ancestor.",
+            "mode": "NULLABLE",
+            "name": "display_name",
+            "type": "STRING"
+          }
+        ],
+        "mode": "REPEATED",
+        "name": "ancestors",
+        "type": "RECORD"
+      }
+    ],
+    "mode": "NULLABLE",
+    "name": "project",
+    "type": "RECORD"
+  },
+  {
+    "description": "User-defined labels associated with the billing record.",
+    "fields": [
+      {
+        "description": "Key of the user-defined label.",
+        "mode": "NULLABLE",
+        "name": "key",
+        "type": "STRING"
+      },
+      {
+        "description": "Value of the user-defined label.",
+        "mode": "NULLABLE",
+        "name": "value",
+        "type": "STRING"
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "labels",
+    "type": "RECORD"
+  },
+  {
+    "description": "System-generated labels associated with the billing record.",
+    "fields": [
+      {
+        "description": "Key of the system label.",
+        "mode": "NULLABLE",
+        "name": "key",
+        "type": "STRING"
+      },
+      {
+        "description": "Value of the system label.",
+        "mode": "NULLABLE",
+        "name": "value",
+        "type": "STRING"
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "system_labels",
+    "type": "RECORD"
+  },
+  {
+    "description": "Location name.",
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "location",
+        "type": "STRING"
+      },
+      {
+        "description": "Country of the location.",
+        "mode": "NULLABLE",
+        "name": "country",
+        "type": "STRING"
+      },
+      {
+        "description": "Region of the location.",
+        "mode": "NULLABLE",
+        "name": "region",
+        "type": "STRING"
+      },
+      {
+        "description": "Zone of the location.",
+        "mode": "NULLABLE",
+        "name": "zone",
+        "type": "STRING"
+      }
+    ],
+    "mode": "NULLABLE",
+    "name": "location",
+    "type": "RECORD"
+  },
+  {
+    "description": "Information about the resource being billed.",
+    "fields": [
+      {
+        "description": "Name of the resource.",
+        "mode": "NULLABLE",
+        "name": "name",
+        "type": "STRING"
+      },
+      {
+        "description": "Global name of the resource.",
+        "mode": "NULLABLE",
+        "name": "global_name",
+        "type": "STRING"
+      }
+    ],
+    "mode": "NULLABLE",
+    "name": "resource",
+    "type": "RECORD"
+  },
+  {
+    "description": "User-defined tags associated with the billing record.",
+    "fields": [
+      {
+        "description": "Key of the user-defined tag.",
+        "mode": "NULLABLE",
+        "name": "key",
+        "type": "STRING"
+      },
+      {
+        "description": "Value of the user-defined tag.",
+        "mode": "NULLABLE",
+        "name": "value",
+        "type": "STRING"
+      },
+      {
+        "description": "Indicates if the tag is inherited from a parent resource.",
+        "mode": "NULLABLE",
+        "name": "inherited",
+        "type": "BOOLEAN"
+      },
+      {
+        "description": "Namespace of the user-defined tag.",
+        "mode": "NULLABLE",
+        "name": "namespace",
+        "type": "STRING"
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "tags",
+    "type": "RECORD"
+  },
+  {
+    "description": "Information about the pricing applied to the billing record.",
+    "fields": [
+      {
+        "description": "Effective price after discounts and credits.",
+        "mode": "NULLABLE",
+        "name": "effective_price",
+        "type": "NUMERIC"
+      },
+      {
+        "description": "Starting amount for the pricing tier.",
+        "mode": "NULLABLE",
+        "name": "tier_start_amount",
+        "type": "NUMERIC"
+      },
+      {
+        "description": "Unit of measure for the pricing.",
+        "mode": "NULLABLE",
+        "name": "unit",
+        "type": "STRING"
+      },
+      {
+        "description": "Quantity of pricing units used.",
+        "mode": "NULLABLE",
+        "name": "pricing_unit_quantity",
+        "type": "NUMERIC"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "list_price",
+        "type": "NUMERIC"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "effective_price_default",
+        "type": "NUMERIC"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "list_price_consumption_model",
+        "type": "NUMERIC"
+      }
+    ],
+    "mode": "NULLABLE",
+    "name": "price",
+    "type": "RECORD"
+  },
+  {
+    "description": "Information about the subscription associated with the billing record.",
+    "fields": [
+      {
+        "description": "Unique identifier for the subscription instance.",
+        "mode": "NULLABLE",
+        "name": "instance_id",
+        "type": "STRING"
+      }
+    ],
+    "mode": "NULLABLE",
+    "name": "subscription",
+    "type": "RECORD"
+  },
+  {
+    "description": "Type of billing transaction.",
+    "mode": "NULLABLE",
+    "name": "transaction_type",
+    "type": "STRING"
+  },
+  {
+    "description": "Name of the seller for the GCP services.",
+    "mode": "NULLABLE",
+    "name": "seller_name",
+    "type": "STRING"
+  },
+  {
+    "description": "Timestamp indicating when the billing data was exported.",
+    "mode": "NULLABLE",
+    "name": "export_time",
+    "type": "TIMESTAMP"
+  },
+  {
+    "description": "Total cost incurred for the billing record.",
+    "mode": "NULLABLE",
+    "name": "cost",
+    "type": "FLOAT"
+  },
+  {
+    "description": "Currency in which the billing is calculated.",
+    "mode": "NULLABLE",
+    "name": "currency",
+    "type": "STRING"
+  },
+  {
+    "description": "Conversion rate used for billing in the specified currency.",
+    "mode": "NULLABLE",
+    "name": "currency_conversion_rate",
+    "type": "FLOAT"
+  },
+  {
+    "description": "Information about the usage of the service or resource.",
+    "fields": [
+      {
+        "description": "Amount of usage.",
+        "mode": "NULLABLE",
+        "name": "amount",
+        "type": "FLOAT"
+      },
+      {
+        "description": "Unit of measure for the usage.",
+        "mode": "NULLABLE",
+        "name": "unit",
+        "type": "STRING"
+      },
+      {
+        "description": "Amount of usage in pricing units.",
+        "mode": "NULLABLE",
+        "name": "amount_in_pricing_units",
+        "type": "FLOAT"
+      },
+      {
+        "description": "Unit of measure for pricing.",
+        "mode": "NULLABLE",
+        "name": "pricing_unit",
+        "type": "STRING"
+      }
+    ],
+    "mode": "NULLABLE",
+    "name": "usage",
+    "type": "RECORD"
+  },
+  {
+    "description": "Information about credits applied to the billing record.",
+    "fields": [
+      {
+        "description": "Name of the credit.",
+        "mode": "NULLABLE",
+        "name": "name",
+        "type": "STRING"
+      },
+      {
+        "description": "Amount of the credit.",
+        "mode": "NULLABLE",
+        "name": "amount",
+        "type": "FLOAT"
+      },
+      {
+        "description": "Full name of the credit.",
+        "mode": "NULLABLE",
+        "name": "full_name",
+        "type": "STRING"
+      },
+      {
+        "description": "Unique identifier for the credit.",
+        "mode": "NULLABLE",
+        "name": "id",
+        "type": "STRING"
+      },
+      {
+        "description": "Type of credit applied.",
+        "mode": "NULLABLE",
+        "name": "type",
+        "type": "STRING"
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "credits",
+    "type": "RECORD"
+  },
+  {
+    "description": "Information about the invoice associated with the billing record.",
+    "fields": [
+      {
+        "description": "Month of the invoice.",
+        "mode": "NULLABLE",
+        "name": "month",
+        "type": "STRING"
+      },
+      {
+        "description": "Type of publisher for the invoice.",
+        "mode": "NULLABLE",
+        "name": "publisher_type",
+        "type": "STRING"
+      }
+    ],
+    "mode": "NULLABLE",
+    "name": "invoice",
+    "type": "RECORD"
+  },
+  {
+    "description": "Type of cost incurred.",
+    "mode": "NULLABLE",
+    "name": "cost_type",
+    "type": "STRING"
+  },
+  {
+    "description": "Information about adjustments made to the billing record.",
+    "fields": [
+      {
+        "description": "Unique identifier for the adjustment.",
+        "mode": "NULLABLE",
+        "name": "id",
+        "type": "STRING"
+      },
+      {
+        "description": "Description of the adjustment.",
+        "mode": "NULLABLE",
+        "name": "description",
+        "type": "STRING"
+      },
+      {
+        "description": "Mode of the adjustment.",
+        "mode": "NULLABLE",
+        "name": "mode",
+        "type": "STRING"
+      },
+      {
+        "description": "Type of adjustment applied.",
+        "mode": "NULLABLE",
+        "name": "type",
+        "type": "STRING"
+      }
+    ],
+    "mode": "NULLABLE",
+    "name": "adjustment_info",
+    "type": "RECORD"
+  },
+  {
+    "description": "Cost of the service at the list price.",
+    "mode": "NULLABLE",
+    "name": "cost_at_list",
+    "type": "FLOAT"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "cost_at_effective_price_default",
+    "type": "FLOAT"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "cost_at_list_consumption_model",
+    "type": "FLOAT"
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "id",
+        "type": "STRING"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "description",
+        "type": "STRING"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "applied_subscription_instance_id",
+        "type": "STRING"
+      }
+    ],
+    "mode": "NULLABLE",
+    "name": "consumption_model",
+    "type": "RECORD"
+  }
+]

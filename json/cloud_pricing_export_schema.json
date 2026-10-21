@@ -1,0 +1,464 @@
+[
+  {
+    "mode": "NULLABLE",
+    "name": "time_stamp",
+    "type": "TIMESTAMP",
+    "description": "The partition column, which represents the timestamp when data is recorded in the table, should be included in every query."
+  },
+  {
+    "description": "When the row was generated.\n",
+    "mode": "NULLABLE",
+    "name": "export_time",
+    "type": "TIMESTAMP"
+  },
+  {
+    "description": "When the pricing was generated. The pricing was valid as of this date,\nbut could have been in effect before that.\n",
+    "mode": "NULLABLE",
+    "name": "pricing_as_of_time",
+    "type": "TIMESTAMP"
+  },
+  {
+    "description": "The ID of the Cloud Billing Account that the pricing is associated with.\n",
+    "mode": "NULLABLE",
+    "name": "billing_account_id",
+    "type": "STRING"
+  },
+  {
+    "description": "The name of the Cloud Billing account that the pricing is associated with.\n",
+    "mode": "NULLABLE",
+    "name": "billing_account_name",
+    "type": "STRING"
+  },
+  {
+    "description": "Business entity name of the service which offers the SKU.\n",
+    "mode": "NULLABLE",
+    "name": "business_entity_name",
+    "type": "STRING"
+  },
+  {
+    "description": "Properties of the Google Cloud Platform service that offers the SKU.",
+    "fields": [
+      {
+        "description": "The ID of the Google Cloud Platform service that offers the SKU.\n",
+        "mode": "NULLABLE",
+        "name": "id",
+        "type": "STRING"
+      },
+      {
+        "description": "The Google Cloud Platform service that offers the SKU.\n",
+        "mode": "NULLABLE",
+        "name": "description",
+        "type": "STRING"
+      }
+    ],
+    "mode": "NULLABLE",
+    "name": "service",
+    "type": "RECORD"
+  },
+  {
+    "description": "Properties of the resource the price is associated with. For example, a resource type for\nCloud Storage is Standard Storage US.\n",
+    "fields": [
+      {
+        "description": "The ID of the resource the price is associated with.\n",
+        "mode": "NULLABLE",
+        "name": "id",
+        "type": "STRING"
+      },
+      {
+        "description": "A description of the resource the price is associated with.\n",
+        "mode": "NULLABLE",
+        "name": "description",
+        "type": "STRING"
+      },
+      {
+        "description": "The destination SKU(s) names which this SKU is being migrated to.\n",
+        "mode": "REPEATED",
+        "name": "destination_migration_mappings",
+        "type": "STRING"
+      }
+    ],
+    "mode": "NULLABLE",
+    "name": "sku",
+    "type": "RECORD"
+  },
+  {
+    "description": "List of product categories that apply to the SKU.\n",
+    "mode": "REPEATED",
+    "name": "product_taxonomy",
+    "type": "STRING"
+  },
+  {
+    "description": "Geographic metadata that applies to the SKU.\n",
+    "fields": [
+      {
+        "description": "The type of geographic metadata associated with the SKU.\n",
+        "mode": "NULLABLE",
+        "name": "type",
+        "type": "STRING"
+      },
+      {
+        "description": "The GCP regions associated with the SKU.\n",
+        "mode": "REPEATED",
+        "name": "regions",
+        "type": "STRING"
+      }
+    ],
+    "mode": "NULLABLE",
+    "name": "geo_taxonomy",
+    "type": "RECORD"
+  },
+  {
+    "description": "The unit in which resource usage is measured.\n",
+    "mode": "NULLABLE",
+    "name": "pricing_unit",
+    "type": "STRING"
+  },
+  {
+    "description": "Human readable description of the pricing unit.\n",
+    "mode": "NULLABLE",
+    "name": "pricing_unit_description",
+    "type": "STRING"
+  },
+  {
+    "description": "The currency that the billing account is configured to invoice in, using a 3-letter\ncurrency code defined in ISO 4217.\n",
+    "mode": "NULLABLE",
+    "name": "account_currency_code",
+    "type": "STRING"
+  },
+  {
+    "description": "The exchange rate from US dollars to the local currency. That is,\nprice/currency_conversion_rate is the price in US dollars.\n",
+    "mode": "NULLABLE",
+    "name": "currency_conversion_rate",
+    "type": "FLOAT"
+  },
+  {
+    "description": "Pricing for any customers who have billing-account-specific pricing.\n",
+    "fields": [
+      {
+        "description": "Represents the aggregation level and interval for the price.\n",
+        "fields": [
+          {
+            "description": "Aggregation level for tiers.\n",
+            "mode": "NULLABLE",
+            "name": "aggregation_level",
+            "type": "STRING"
+          },
+          {
+            "description": "Aggregation interval for tiers.\n",
+            "mode": "NULLABLE",
+            "name": "aggregation_interval",
+            "type": "STRING"
+          }
+        ],
+        "mode": "NULLABLE",
+        "name": "aggregation_info",
+        "type": "RECORD"
+      },
+      {
+        "description": "The price rate indicating starting usage and its corresponding price.\n",
+        "fields": [
+          {
+            "description": "Quantity of units the price refers to.\n",
+            "mode": "NULLABLE",
+            "name": "pricing_unit_quantity",
+            "type": "FLOAT"
+          },
+          {
+            "description": "Lower bound amount for a given pricing tier, in pricing units.\n",
+            "mode": "NULLABLE",
+            "name": "start_usage_amount",
+            "type": "FLOAT"
+          },
+          {
+            "description": "The price, in USD, for the SKU.\n",
+            "mode": "NULLABLE",
+            "name": "usd_amount",
+            "type": "FLOAT"
+          },
+          {
+            "description": "The converted price, for the SKU, in the currency the Cloud Billing Account is\nconfigured to use. The conversion rate will be the one that is or was effective\non the `pricing_as_of_time`.\n",
+            "mode": "NULLABLE",
+            "name": "account_currency_amount",
+            "type": "FLOAT"
+          }
+        ],
+        "mode": "REPEATED",
+        "name": "tiered_rates",
+        "type": "RECORD"
+      }
+    ],
+    "mode": "NULLABLE",
+    "name": "list_price",
+    "type": "RECORD"
+  },
+  {
+    "description": "Pricing for any customers who have billing-account-specific pricing.\n",
+    "fields": [
+      {
+        "description": "Background information of the price.\n",
+        "fields": [
+          {
+            "description": "Background information on where the price originated from.\n",
+            "mode": "NULLABLE",
+            "name": "price_reason",
+            "type": "STRING"
+          },
+          {
+            "description": "For pricing that is the result of a percent discount, this is the percent\ndiscount used.\n",
+            "mode": "NULLABLE",
+            "name": "discount_percent",
+            "type": "FLOAT"
+          },
+          {
+            "description": "For pricing that is anchored to a specific date, the date used.\n",
+            "mode": "NULLABLE",
+            "name": "discount_percent_fixed_date",
+            "type": "DATE"
+          },
+          {
+            "description": "For discounts that were migrated from other SKUs, the source SKU of the discount.\n",
+            "mode": "NULLABLE",
+            "name": "discount_migrated_from",
+            "type": "STRING"
+          }
+        ],
+        "mode": "NULLABLE",
+        "name": "price_info",
+        "type": "RECORD"
+      },
+      {
+        "description": "Represents the aggregation level and interval for the price.\n",
+        "fields": [
+          {
+            "description": "Aggregation level for tiers.\n",
+            "mode": "NULLABLE",
+            "name": "aggregation_level",
+            "type": "STRING"
+          },
+          {
+            "description": "Aggregation interval for tiers.\n",
+            "mode": "NULLABLE",
+            "name": "aggregation_interval",
+            "type": "STRING"
+          }
+        ],
+        "mode": "NULLABLE",
+        "name": "aggregation_info",
+        "type": "RECORD"
+      },
+      {
+        "description": "The price rate indicating starting usage and its corresponding price.\n",
+        "fields": [
+          {
+            "description": "Quantity of units the price refers to.\n",
+            "mode": "NULLABLE",
+            "name": "pricing_unit_quantity",
+            "type": "FLOAT"
+          },
+          {
+            "description": "Lower bound amount for a given pricing tier, in pricing units.\n",
+            "mode": "NULLABLE",
+            "name": "start_usage_amount",
+            "type": "FLOAT"
+          },
+          {
+            "description": "The price, in USD, for the SKU.\n",
+            "mode": "NULLABLE",
+            "name": "usd_amount",
+            "type": "FLOAT"
+          },
+          {
+            "description": "The converted price, for the SKU, in the currency the Cloud Billing Account is\nconfigured to use. The conversion rate will be the one that is or was effective\non the `pricing_as_of_time`.\n",
+            "mode": "NULLABLE",
+            "name": "account_currency_amount",
+            "type": "FLOAT"
+          }
+        ],
+        "mode": "REPEATED",
+        "name": "tiered_rates",
+        "type": "RECORD"
+      }
+    ],
+    "mode": "NULLABLE",
+    "name": "billing_account_price",
+    "type": "RECORD"
+  },
+  {
+    "description": "Consumption model prices for the SKU.\n",
+    "fields": [
+      {
+        "description": "The ID of the consumption model.\n",
+        "mode": "NULLABLE",
+        "name": "consumption_model_id",
+        "type": "STRING"
+      },
+      {
+        "description": "The display name of the consumption model.\n",
+        "mode": "NULLABLE",
+        "name": "consumption_model_display_name",
+        "type": "STRING"
+      },
+      {
+        "description": "Prices for the consumption model, for any customers who have billing-account-specific\npricing.\n",
+        "fields": [
+          {
+            "description": "Background information of the price.\n",
+            "fields": [
+              {
+                "description": "Background information on where the price originated from.\n",
+                "mode": "NULLABLE",
+                "name": "price_reason",
+                "type": "STRING"
+              },
+              {
+                "description": "For pricing that is the result of a percent discount, this is the percent\ndiscount used.\n",
+                "mode": "NULLABLE",
+                "name": "discount_percent",
+                "type": "FLOAT"
+              },
+              {
+                "description": "For pricing that is anchored to a specific date, the date used.\n",
+                "mode": "NULLABLE",
+                "name": "discount_percent_fixed_date",
+                "type": "DATE"
+              },
+              {
+                "description": "For discounts that were migrated from other SKUs, the source SKU of the\ndiscount.\n",
+                "mode": "NULLABLE",
+                "name": "discount_migrated_from",
+                "type": "STRING"
+              }
+            ],
+            "mode": "NULLABLE",
+            "name": "price_info",
+            "type": "RECORD"
+          },
+          {
+            "description": "Represents the aggregation level and interval for the price.\n",
+            "fields": [
+              {
+                "description": "Aggregation level for tiers.\n",
+                "mode": "NULLABLE",
+                "name": "aggregation_level",
+                "type": "STRING"
+              },
+              {
+                "description": "Aggregation interval for tiers.\n",
+                "mode": "NULLABLE",
+                "name": "aggregation_interval",
+                "type": "STRING"
+              }
+            ],
+            "mode": "NULLABLE",
+            "name": "aggregation_info",
+            "type": "RECORD"
+          },
+          {
+            "description": "The price rate indicating starting usage and its corresponding price.\n",
+            "fields": [
+              {
+                "description": "Quantity of units the price refers to.\n",
+                "mode": "NULLABLE",
+                "name": "pricing_unit_quantity",
+                "type": "FLOAT"
+              },
+              {
+                "description": "Lower bound amount for a given pricing tier, in pricing units.\n",
+                "mode": "NULLABLE",
+                "name": "start_usage_amount",
+                "type": "FLOAT"
+              },
+              {
+                "description": "The price, in USD, for the SKU.\n",
+                "mode": "NULLABLE",
+                "name": "usd_amount",
+                "type": "FLOAT"
+              },
+              {
+                "description": "The converted price, for the SKU, in the currency the Cloud Billing Account is\nconfigured to use. The conversion rate will be the one that is or was\neffective on the `pricing_as_of_time`.\n",
+                "mode": "NULLABLE",
+                "name": "account_currency_amount",
+                "type": "FLOAT"
+              }
+            ],
+            "mode": "REPEATED",
+            "name": "tiered_rates",
+            "type": "RECORD"
+          }
+        ],
+        "mode": "NULLABLE",
+        "name": "billing_account_price",
+        "type": "RECORD"
+      },
+      {
+        "description": "List price for the consumption model.\n",
+        "fields": [
+          {
+            "description": "Represents the aggregation level and interval for the price.\n",
+            "fields": [
+              {
+                "description": "Aggregation level for tiers.\n",
+                "mode": "NULLABLE",
+                "name": "aggregation_level",
+                "type": "STRING"
+              },
+              {
+                "description": "Aggregation interval for tiers.\n",
+                "mode": "NULLABLE",
+                "name": "aggregation_interval",
+                "type": "STRING"
+              }
+            ],
+            "mode": "NULLABLE",
+            "name": "aggregation_info",
+            "type": "RECORD"
+          },
+          {
+            "description": "The price rate indicating starting usage and its corresponding price.\n",
+            "fields": [
+              {
+                "description": "Quantity of units the price refers to.\n",
+                "mode": "NULLABLE",
+                "name": "pricing_unit_quantity",
+                "type": "FLOAT"
+              },
+              {
+                "description": "Lower bound amount for a given pricing tier, in pricing units.\n",
+                "mode": "NULLABLE",
+                "name": "start_usage_amount",
+                "type": "FLOAT"
+              },
+              {
+                "description": "The price, in USD, for the SKU.\n",
+                "mode": "NULLABLE",
+                "name": "usd_amount",
+                "type": "FLOAT"
+              },
+              {
+                "description": "The converted price, for the SKU, in the currency the Cloud Billing Account is\nconfigured to use. The conversion rate will be the one that is or was\neffective on the `pricing_as_of_time`.\n",
+                "mode": "NULLABLE",
+                "name": "account_currency_amount",
+                "type": "FLOAT"
+              }
+            ],
+            "mode": "REPEATED",
+            "name": "tiered_rates",
+            "type": "RECORD"
+          }
+        ],
+        "mode": "NULLABLE",
+        "name": "list_price",
+        "type": "RECORD"
+      },
+      {
+        "description": "The description of the consumption model.\n",
+        "mode": "NULLABLE",
+        "name": "consumption_model_description",
+        "type": "STRING"
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "consumption_model_prices",
+    "type": "RECORD"
+  }
+]

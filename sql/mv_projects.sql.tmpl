@@ -1,0 +1,25 @@
+-- =============================================================================
+-- Template: Per-Billing Account Projects Materialized View (`projects`)
+-- Target:   `${BA_PROJECT_ID}.${BA_DATASET}.projects`
+-- Note:     Created in EACH Billing Account export dataset.
+--           Uses MAX_BY(project.ancestry_numbers, _PARTITIONTIME) to keep each
+--           project unique while capturing its latest folder ancestry path.
+-- =============================================================================
+
+CREATE MATERIALIZED VIEW IF NOT EXISTS `${BA_PROJECT_ID}.${BA_DATASET}.projects`
+OPTIONS (
+  enable_refresh = true,
+  refresh_interval_minutes = 60,
+  description = "Materialized view of all distinct projects within Billing Account ${BA_ID}"
+) AS
+SELECT
+  project.id AS project_id,
+  project.number AS project_number,
+  MAX_BY(project.ancestry_numbers, _PARTITIONTIME) AS object,
+  billing_account_id
+FROM
+  `${BA_PROJECT_ID}`.`${BA_DATASET}`.`gcp_billing_export_v1_${BA_ID}`
+GROUP BY
+  project.id,
+  project.number,
+  billing_account_id;

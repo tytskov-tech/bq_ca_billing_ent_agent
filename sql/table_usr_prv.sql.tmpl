@@ -1,0 +1,16 @@
+-- =============================================================================
+-- Template: User Privileges Table (`usr-prv`)
+-- Target:   `${PROJECT_ID}.${ENT_DATASET}.${USR_PRV_TABLE}`
+-- =============================================================================
+
+CREATE TABLE IF NOT EXISTS `${PROJECT_ID}.${ENT_DATASET}.${USR_PRV_TABLE}` (
+  `date` TIMESTAMP,
+  `user` STRING,
+  `project_id` STRING,
+  `obj_number` STRING,
+  `billing_id` STRING,
+  `status` BOOL
+)
+OPTIONS(
+  description="Access control table mapping SESSION_USER() to allowed Billing Accounts and GCP projects"
+);

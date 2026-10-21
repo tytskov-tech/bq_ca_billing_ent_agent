@@ -1,0 +1,76 @@
+-- =============================================================================
+-- Template: Authorized Billing Projects View (`billing_projects`)
+-- Target:   `${PROJECT_ID}.${ENT_DATASET}.billing_projects`
+-- =============================================================================
+
+CREATE OR REPLACE VIEW `${PROJECT_ID}.${ENT_DATASET}.billing_projects`
+OPTIONS(
+  description="Authorized Billing Accounts and GCP Projects for the active SESSION_USER()"
+) AS
+WITH projects AS (
+  SELECT *
+  FROM (
+${UNION_BA_PROJECTS_MV_QUERY}
+  )
+)
+SELECT
+  PROJECT,
+  project_number,
+  billing_account_id
+FROM (
+  SELECT -- Check allowed projects
+    bill.project_id AS PROJECT,
+    bill.project_number,
+    bill.billing_account_id
+  FROM
+    projects AS bill
+  LEFT JOIN
+    `${PROJECT_ID}.${ENT_DATASET}.${USR_PRV_TABLE}` AS usr
+  ON
+    bill.project_id = usr.project_id
+  WHERE
+    LOWER(usr.user) = LOWER(SESSION_USER())
+    AND usr.status = true
+    AND usr.project_id IS NOT NULL
+    AND usr.project_id != ''
+
+  UNION DISTINCT
+
+  SELECT -- Check allowed folders
+    bill.project_id AS PROJECT,
+    bill.project_number,
+    bill.billing_account_id
+  FROM
+    projects AS bill
+  LEFT JOIN
+    `${PROJECT_ID}.${ENT_DATASET}.${USR_PRV_TABLE}` AS usr
+  ON
+    usr.obj_number IS NOT NULL
+    AND usr.obj_number != ''
+    AND bill.object LIKE CONCAT("%/", usr.obj_number, "/%")
+  WHERE
+    LOWER(usr.user) = LOWER(SESSION_USER())
+    AND usr.status = true
+
+  UNION DISTINCT
+
+  SELECT -- Check allowed billing accounts
+    bill.project_id AS PROJECT,
+    bill.project_number,
+    bill.billing_account_id
+  FROM
+    projects AS bill
+  LEFT JOIN
+    `${PROJECT_ID}.${ENT_DATASET}.${USR_PRV_TABLE}` AS usr
+  ON
+    usr.billing_id IS NOT NULL
+    AND usr.billing_id != ''
+    AND (
+      bill.billing_account_id = usr.billing_id
+      OR usr.billing_id = 'ALL'
+    )
+  WHERE
+    LOWER(usr.user) = LOWER(SESSION_USER())
+    AND usr.status = true
+)
+GROUP BY 1, 2, 3;

@@ -1,0 +1,487 @@
+[
+  {
+    "mode": "NULLABLE",
+    "name": "time_stamp",
+    "type": "TIMESTAMP",
+    "description": "The partition column, which represents the timestamp when data is recorded in the table, should be included in every query."
+  },
+  {
+    "description": "Primary key for cost attribution, multi-tenant billing management, and identifying financial boundaries.",
+    "mode": "NULLABLE",
+    "name": "billing_account_id",
+    "type": "STRING"
+  },
+  {
+    "fields": [
+      {
+        "description": "Granular service-level cost attribution and identification of high-spend categories.",
+        "mode": "NULLABLE",
+        "name": "id",
+        "type": "STRING"
+      },
+      {
+        "description": "High-level categorization of spend by product family for reporting, budgeting, and trend analysis.",
+        "mode": "NULLABLE",
+        "name": "description",
+        "type": "STRING"
+      }
+    ],
+    "mode": "NULLABLE",
+    "name": "service",
+    "type": "RECORD"
+  },
+  {
+    "fields": [
+      {
+        "description": "Unit cost analysis and mapping to pricing catalogs for rate optimization.",
+        "mode": "NULLABLE",
+        "name": "id",
+        "type": "STRING"
+      },
+      {
+        "description": "Granular drill-down into resource-level spending for optimization and unit cost identification.",
+        "mode": "NULLABLE",
+        "name": "description",
+        "type": "STRING"
+      }
+    ],
+    "mode": "NULLABLE",
+    "name": "sku",
+    "type": "RECORD"
+  },
+  {
+    "description": "Time-series analysis, identifying usage spikes, and query partitioning for cost control.",
+    "mode": "NULLABLE",
+    "name": "usage_start_time",
+    "type": "TIMESTAMP"
+  },
+  {
+    "description": "Defining usage duration for efficiency metrics and precise hourly cost modeling.",
+    "mode": "NULLABLE",
+    "name": "usage_end_time",
+    "type": "TIMESTAMP"
+  },
+  {
+    "fields": [
+      {
+        "description": "Primary dimension for departmental cost attribution, showback, chargeback, and environment-based tracking.",
+        "mode": "NULLABLE",
+        "name": "id",
+        "type": "STRING"
+      },
+      {
+        "description": "Internally generated, unique identifier for the Google Cloud project.",
+        "mode": "NULLABLE",
+        "name": "number",
+        "type": "STRING"
+      },
+      {
+        "description": "User-friendly cost reporting and visibility for non-technical stakeholders.",
+        "mode": "NULLABLE",
+        "name": "name",
+        "type": "STRING"
+      },
+      {
+        "description": "Broad cost attribution to departments or business units via project-level metadata.",
+        "fields": [
+          {
+            "mode": "NULLABLE",
+            "name": "key",
+            "type": "STRING"
+          },
+          {
+            "mode": "NULLABLE",
+            "name": "value",
+            "type": "STRING"
+          }
+        ],
+        "mode": "REPEATED",
+        "name": "labels",
+        "type": "RECORD"
+      },
+      {
+        "description": "Hierarchical cost aggregation for business units and organizational divisions.",
+        "mode": "NULLABLE",
+        "name": "ancestry_numbers",
+        "type": "STRING"
+      },
+      {
+        "description": "Advanced SQL UNNEST operations to filter by organizational structure.",
+        "fields": [
+          {
+            "mode": "NULLABLE",
+            "name": "resource_name",
+            "type": "STRING"
+          },
+          {
+            "mode": "NULLABLE",
+            "name": "display_name",
+            "type": "STRING"
+          }
+        ],
+        "mode": "REPEATED",
+        "name": "ancestors",
+        "type": "RECORD"
+      }
+    ],
+    "mode": "NULLABLE",
+    "name": "project",
+    "type": "RECORD"
+  },
+  {
+    "description": "Custom metadata-driven cost allocation for business units, teams, applications, or cost centers.",
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "key",
+        "type": "STRING"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "value",
+        "type": "STRING"
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "labels",
+    "type": "RECORD"
+  },
+  {
+    "description": "Right-sizing analysis based on technical resource configurations like vCPU, RAM, and cores.",
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "key",
+        "type": "STRING"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "value",
+        "type": "STRING"
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "system_labels",
+    "type": "RECORD"
+  },
+  {
+    "fields": [
+      {
+        "description": "Regional spend analysis, data sovereignty tracking, and location-based price optimization.",
+        "mode": "NULLABLE",
+        "name": "location",
+        "type": "STRING"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "country",
+        "type": "STRING"
+      },
+      {
+        "description": "Regional price variance analysis and workload placement optimization.",
+        "mode": "NULLABLE",
+        "name": "region",
+        "type": "STRING"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "zone",
+        "type": "STRING"
+      }
+    ],
+    "mode": "NULLABLE",
+    "name": "location",
+    "type": "RECORD"
+  },
+  {
+    "description": "Governance-grade cost allocation using organization-enforced hierarchical tags.",
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "key",
+        "type": "STRING"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "value",
+        "type": "STRING"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "inherited",
+        "type": "BOOLEAN"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "namespace",
+        "type": "STRING"
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "tags",
+    "type": "RECORD"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "transaction_type",
+    "type": "STRING"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "seller_name",
+    "type": "STRING"
+  },
+  {
+    "description": "Monitoring data freshness, ETL pipeline latency, and incremental loading checks.",
+    "mode": "NULLABLE",
+    "name": "export_time",
+    "type": "TIMESTAMP"
+  },
+  {
+    "description": "Primary metric for gross spend analysis, baseline expenditure tracking, and budget monitoring.",
+    "mode": "NULLABLE",
+    "name": "cost",
+    "type": "FLOAT"
+  },
+  {
+    "description": "Multi-currency financial consolidation and global exchange rate reconciliation.",
+    "mode": "NULLABLE",
+    "name": "currency",
+    "type": "STRING"
+  },
+  {
+    "description": "Currency fluctuation impact analysis and global cost consolidation.",
+    "mode": "NULLABLE",
+    "name": "currency_conversion_rate",
+    "type": "FLOAT"
+  },
+  {
+    "fields": [
+      {
+        "description": "Measuring consumption volume, capacity planning, and calculating efficiency metrics.",
+        "mode": "NULLABLE",
+        "name": "amount",
+        "type": "FLOAT"
+      },
+      {
+        "description": "Normalization of usage metrics across services for unit economics and benchmarking.",
+        "mode": "NULLABLE",
+        "name": "unit",
+        "type": "STRING"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "amount_in_pricing_units",
+        "type": "FLOAT"
+      },
+      {
+        "description": "Shorthand for the unit of pricing for the usage amount.",
+        "mode": "NULLABLE",
+        "name": "pricing_unit",
+        "type": "STRING"
+      }
+    ],
+    "mode": "NULLABLE",
+    "name": "usage",
+    "type": "RECORD"
+  },
+  {
+    "description": "Calculating net cost, measuring discount effectiveness, and tracking commitment savings.",
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "name",
+        "type": "STRING"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "amount",
+        "type": "FLOAT"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "full_name",
+        "type": "STRING"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "id",
+        "type": "STRING"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "type",
+        "type": "STRING"
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "credits",
+    "type": "RECORD"
+  },
+  {
+    "fields": [
+      {
+        "description": "Monthly financial reporting, budget reconciliation, and fiscal period auditing.",
+        "mode": "NULLABLE",
+        "name": "month",
+        "type": "STRING"
+      },
+      {
+        "description": "Marketplace management and third-party vendor cost analysis.",
+        "mode": "NULLABLE",
+        "name": "publisher_type",
+        "type": "STRING"
+      }
+    ],
+    "mode": "NULLABLE",
+    "name": "invoice",
+    "type": "RECORD"
+  },
+  {
+    "description": "Distinguishing between operational usage and administrative overhead/taxes for net spend analysis.",
+    "mode": "NULLABLE",
+    "name": "cost_type",
+    "type": "STRING"
+  },
+  {
+    "description": "Billing accuracy auditing and credit memo tracking.",
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "id",
+        "type": "STRING"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "description",
+        "type": "STRING"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "mode",
+        "type": "STRING"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "type",
+        "type": "STRING"
+      }
+    ],
+    "mode": "NULLABLE",
+    "name": "adjustment_info",
+    "type": "RECORD"
+  },
+  {
+    "description": "Measuring negotiated discount effectiveness and total potential savings.",
+    "mode": "NULLABLE",
+    "name": "cost_at_list",
+    "type": "FLOAT"
+  },
+  {
+    "fields": [
+      {
+        "description": "Validating contract compliance and monitoring unit rate optimization.",
+        "mode": "NULLABLE",
+        "name": "effective_price",
+        "type": "NUMERIC"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "tier_start_amount",
+        "type": "NUMERIC"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "unit",
+        "type": "STRING"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "pricing_unit_quantity",
+        "type": "NUMERIC"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "list_price",
+        "type": "NUMERIC"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "effective_price_default",
+        "type": "NUMERIC"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "list_price_consumption_model",
+        "type": "NUMERIC"
+      }
+    ],
+    "mode": "NULLABLE",
+    "name": "price",
+    "type": "RECORD"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "cost_at_effective_price_default",
+    "type": "FLOAT"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "cost_at_list_consumption_model",
+    "type": "FLOAT"
+  },
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "id",
+        "type": "STRING"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "description",
+        "type": "STRING"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "applied_subscription_instance_id",
+        "type": "STRING"
+      }
+    ],
+    "mode": "NULLABLE",
+    "name": "consumption_model",
+    "type": "RECORD"
+  },
+  {
+    "fields": [
+      {
+        "description": "Micro-level optimization, identifying \"zombie\" or orphaned resources, and per-instance cost attribution.",
+        "mode": "NULLABLE",
+        "name": "name",
+        "type": "STRING"
+      },
+      {
+        "description": "Universal resource identification for deep-dive tracking across global namespaces.",
+        "mode": "NULLABLE",
+        "name": "global_name",
+        "type": "STRING"
+      }
+    ],
+    "mode": "NULLABLE",
+    "name": "resource",
+    "type": "RECORD"
+  },
+  {
+    "fields": [
+      {
+        "description": "CUD utilization tracking and specific purchase instance identification.",
+        "mode": "NULLABLE",
+        "name": "instance_id",
+        "type": "STRING"
+      }
+    ],
+    "mode": "NULLABLE",
+    "name": "subscription",
+    "type": "RECORD"
+  }
+]

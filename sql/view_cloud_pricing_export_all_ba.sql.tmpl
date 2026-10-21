@@ -1,0 +1,24 @@
+-- =============================================================================
+-- Template: Per-Billing Account SELECT block for `cloud_pricing_export_all_ba`
+-- Target:   `${PROJECT_ID}.${ENT_DATASET}.cloud_pricing_export_all_ba`
+-- Note:     Rendered per entry in BILLING_ACCOUNTS and combined via
+--           UNION ALL inside `SELECT * FROM ( ... )` by 03_create_ent_views.sh.
+-- =============================================================================
+      SELECT
+        _PARTITIONTIME AS time_stamp,
+        * REPLACE (
+          ARRAY(
+            SELECT AS STRUCT
+              cm.consumption_model_id,
+              cm.consumption_model_display_name,
+              cm.billing_account_price,
+              cm.list_price
+            FROM UNNEST(consumption_model_prices) AS cm
+          ) AS consumption_model_prices
+        )
+      FROM
+        `${BA_PROJECT_ID}.${BA_DATASET}.cloud_pricing_export`
+      WHERE
+        billing_account_id IN (
+          SELECT billing_account_id FROM `${PROJECT_ID}.${ENT_DATASET}.billing_projects`
+        )

@@ -1,0 +1,44 @@
+-- =============================================================================
+-- Template: Per-BA SELECT block for `gcp_billing_export_resource_v1_all_ba`
+-- Target View: `${PROJECT_ID}.${ENT_DATASET}.gcp_billing_export_resource_v1_all_ba`
+-- Note: `03_create_ent_views.sh` renders this SELECT block for each configured
+--       Billing Account in BILLING_ACCOUNTS, joins them with UNION ALL, and
+--       wraps them in:
+--       CREATE OR REPLACE VIEW `${PROJECT_ID}.${ENT_DATASET}.gcp_billing_export_resource_v1_all_ba` AS
+--       SELECT * FROM ( <UNION ALL of rendered blocks> );
+-- =============================================================================
+    SELECT
+      _PARTITIONTIME AS time_stamp,
+      billing_account_id,
+      service,
+      sku,
+      usage_start_time,
+      usage_end_time,
+      project,
+      labels,
+      system_labels,
+      location,
+      tags,
+      transaction_type,
+      seller_name,
+      export_time,
+      cost,
+      currency,
+      currency_conversion_rate,
+      usage,
+      credits,
+      invoice,
+      cost_type,
+      adjustment_info,
+      cost_at_list,
+      price,
+      cost_at_effective_price_default,
+      cost_at_list_consumption_model,
+      STRUCT(consumption_model.id, consumption_model.description)
+        AS consumption_model
+    FROM
+      `${BA_PROJECT_ID}.${BA_DATASET}.gcp_billing_export_resource_v1_${BA_ID}`
+    WHERE
+      project.id IN (
+        SELECT PROJECT FROM `${PROJECT_ID}.${ENT_DATASET}.billing_projects`
+      )
