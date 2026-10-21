@@ -110,7 +110,7 @@ ${RES_SELECT_QUERY};"
   CREATED_RES_VIEW="true"
 else
   log_warn "Skipping creation of view '${PROJECT_ID}.${ENT_DATASET}.gcp_billing_export_resource_v1_all_ba' because no 'gcp_billing_export_resource_v1_<BA>' tables are currently available."
-  log_warn "Action Recommended: Please create/enable the Detailed Usage Cost Export tables by following the procedure outlined in README.md ('Enabling Required BigQuery Export Tables') and re-run this script. Without this table the agent answers will be less informative."
+  log_warn "Action Recommended: Please create/enable the Detailed Usage Cost Export tables by following the procedure outlined in INSTALLATION.md ('Enabling Required BigQuery Export Tables') and re-run this script. Without this table the agent answers will be less informative."
 fi
 
 # 5. Build recommendations_export_all_ba view (verify table availability per source)
@@ -146,7 +146,7 @@ ${REC_SELECT_QUERY};"
   CREATED_REC_VIEW="true"
 else
   log_warn "Skipping creation of view '${PROJECT_ID}.${ENT_DATASET}.recommendations_export_all_ba' because no 'recommendations_export' tables are currently available."
-  log_warn "Action Recommended: Please create/enable the Recommendations Export tables by following the procedure outlined in README.md ('Enabling Required BigQuery Export Tables') and re-run this script. Without this table the agent answers will be less informative."
+  log_warn "Action Recommended: Please create/enable the Recommendations Export tables by following the procedure outlined in INSTALLATION.md ('Enabling Required BigQuery Export Tables') and re-run this script. Without this table the agent answers will be less informative."
 fi
 
 # 6. Build cloud_pricing_export_all_ba view (verify table availability per BA)
@@ -182,7 +182,7 @@ ${PRICING_SELECT_QUERY};"
   CREATED_PRC_VIEW="true"
 else
   log_warn "Skipping creation of view '${PROJECT_ID}.${ENT_DATASET}.cloud_pricing_export_all_ba' because no 'cloud_pricing_export' tables are currently available."
-  log_warn "Action Recommended: Please create/enable the Cloud Billing Pricing Export tables by following the procedure outlined in README.md ('Enabling Required BigQuery Export Tables') and re-run this script. Without this table the agent answers will be less informative."
+  log_warn "Action Recommended: Please create/enable the Cloud Billing Pricing Export tables by following the procedure outlined in INSTALLATION.md ('Enabling Required BigQuery Export Tables') and re-run this script. Without this table the agent answers will be less informative."
 fi
 
 # 7. Configure Dataset Authorized Views (BQ Data Viewer for MVs & Views on appropriate datasets)

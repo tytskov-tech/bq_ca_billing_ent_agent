@@ -406,7 +406,7 @@ require_ba_standard_table() {
   if ! check_bq_table_exists "${ba_project}" "${ba_dataset}" "${std_table}"; then
     log_error "Mandatory table '${full_ref}' is not present or is inaccessible."
     log_error "Halting installation: Each Billing Account MUST include '${std_table}'."
-    log_error "Please enable Standard Usage Cost Export and verify IAM permissions by following the procedure in README.md ('Enabling Required BigQuery Export Tables')."
+    log_error "Please enable Standard Usage Cost Export and verify IAM permissions by following the procedure in INSTALLATION.md ('Enabling Required BigQuery Export Tables')."
     exit 1
   fi
   log_info "Verified mandatory table: ${full_ref}"
@@ -425,7 +425,7 @@ check_optional_table() {
   log_info "Verifying table availability: ${full_ref} (${table_label})..."
   if ! check_bq_table_exists "${target_project}" "${target_dataset}" "${target_table}"; then
     log_warn "Optional table '${full_ref}' (${table_label}) is not present or is inaccessible."
-    log_warn "Action Recommended: Please create/enable '${target_table}' in '${target_project}:${target_dataset}' by following the procedure outlined in the documentation (README.md -> 'Enabling Required BigQuery Export Tables'). Without this table the agent answers will be less informative."
+    log_warn "Action Recommended: Please create/enable '${target_table}' in '${target_project}:${target_dataset}' by following the procedure outlined in the documentation (INSTALLATION.md -> 'Enabling Required BigQuery Export Tables'). Without this table the agent answers will be less informative."
     return 1
   fi
   log_info "Verified table: ${full_ref}"
@@ -477,7 +477,7 @@ EOF
 
   if ! check_bq_table_exists "${PROJECT_ID}" "${ENT_DATASET}" "${view_name}"; then
     log_warn "View '${view_ref}' does not exist. Skipping IAM binding for '${view_name}'."
-    log_warn "Action Recommended: Please create/enable the underlying export table(s) by following the procedure in README.md ('Enabling Required BigQuery Export Tables') and re-run ./scripts/03_create_ent_views.sh. Without this table the agent answers will be less informative."
+    log_warn "Action Recommended: Please create/enable the underlying export table(s) by following the procedure in INSTALLATION.md ('Enabling Required BigQuery Export Tables') and re-run ./scripts/03_create_ent_views.sh. Without this table the agent answers will be less informative."
     return 0
   fi
 

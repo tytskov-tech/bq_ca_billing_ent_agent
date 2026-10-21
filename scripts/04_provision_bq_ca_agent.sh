@@ -102,7 +102,7 @@ for opt_view in "gcp_billing_export_resource_v1_all_ba" "cloud_pricing_export_al
     AVAILABLE_VIEWS+=("${opt_view}")
   else
     log_warn "View '${PROJECT_ID}:${ENT_DATASET}.${opt_view}' is not present."
-    log_warn "Action Recommended: Please create/enable the required underlying export table(s) by following the procedure in README.md ('Enabling Required BigQuery Export Tables') and re-run ./scripts/03_create_ent_views.sh and ./scripts/04_provision_bq_ca_agent.sh. Without this table the agent answers will be less informative."
+    log_warn "Action Recommended: Please create/enable the required underlying export table(s) by following the procedure in INSTALLATION.md ('Enabling Required BigQuery Export Tables') and re-run ./scripts/03_create_ent_views.sh and ./scripts/04_provision_bq_ca_agent.sh. Without this table the agent answers will be less informative."
   fi
 done
 
